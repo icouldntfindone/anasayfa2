@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloglar</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .blog-post {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            word-wrap: break-word; /* Uzun kelimeleri kır */
+    hyphens: auto; /
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .blog-post h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .blog-post .meta {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .blog-post p {
+            display: none;
+            font-size: 16px;
+    line-height: 1.6;
+    overflow-wrap: break-word; /* Uzun kelimeleri kır */
+    word-wrap: break-word; /* Uzun kelimeleri kır (eski tarayıcılar için) */
+    hyphens: auto; /* İçeriği başlangıçta gizle */
+        }
+        .blog-post .btn-primary {
+            background-color: #292b2c; 
+            border-color: #292b2c;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+        .blog-post .btn-primary:hover {
+            background-color: #555; 
+            border-color: #555;
+        }
+        /* Kapat düğmesi stil */
+        .close-button {
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none; /* Başlangıçta kapat düğmesini gizle */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        {% for blog in published_blogs %}
+        <div class="col-md-6">
+            <div class="blog-post" id="blog{{ forloop.counter }}">
+                <img src="{{ blog.image.url }}" alt="Blog Post Image">
+                <h2>{{ blog.title }}</h2>
+                <p>{{ blog.content }}</p>
+                <a href="javascript:void(0);" class="btn btn-primary" onclick="toggleContent('blog{{ forloop.counter }}')">Devamını Oku</a>
+                <button class="close-button" onclick="toggleContent('blog{{ forloop.counter }}')">Kapat</button>
+            </div>
+            <div style="position: fixed; bottom: 20px; right: 20px;">
+                <a href="{% url 'create_blog' %}"><button class="btn btn-primary">Blog Yaz</button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap JS ve jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // İçeriği gizlemek veya göstermek için JavaScript fonksiyonu
+    function toggleContent(id) {
+        var content = document.getElementById(id).querySelector('p');
+        var closeButton = document.getElementById(id).querySelector('.close-button');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            closeButton.style.display = 'inline-block';
+        } else {
+            if (content.innerHTML.trim() !== '') {
+                content.style.display = 'none';
+                closeButton.style.display = 'none';
+            }
+        }
+    }
+</script>
+
+</script>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Forum Tasarımı</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .fixed-bottom-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  {% csrf_token %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Forum Başlığı</h1>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Taşlar</h5>
+          <p class="card-text">Taşlar hakkında yazılanlar buraya gelecek.</p>
+          <a href="" class="btn btn-primary">Devamını Oku</a>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Arabalar</h5>
+          <p class="card-text">Arabalar hakkında yazılanlar buraya gelecek.</p>
+          <a href="#" class="btn btn-primary">Devamını Oku</a>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Filmler</h5>
+          <p class="card-text">Filmler hakkında yazılanlar buraya gelecek.</p>
+          <a href="#" class="btn btn-primary">Devamını Oku</a>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Müzikler</h5>
+          <p class="card-text">Müzikler hakkında yazılanlar buraya gelecek.</p>
+          <a href="#" class="btn btn-primary">Devamını Oku</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul>
+{% for forum in forums %}
+<li><a href="{% url 'discussion_list' forum.id %}">{{ forum.title }}</a></li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'forum_detail' %}" class="btn btn-success fixed-bottom-right">Forum Başlığı Ekle</a>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
